@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>CSS contenteditable</title>
+        <style>
+            style {
+                display: block;
+                font-family: monospace;
+                padding: 17px;
+                border: 2px #ccc solid;
+                background-color: #eee;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Saluton Mondo</h1>
+        <p>
+            Ipsum aspernatur facilis nesciunt architecto itaque sapiente
+            Laboriosam aspernatur iusto earum sint at. Corporis unde quasi
+            excepturi non nulla Iure quidem impedit quisquam est veritatis
+            Distinctio vero sequi suscipit obcaecati.
+        </p>
+        <hr>
+        <h2>Style Editor</h2>
+        <p>Edit the CSS below to update the page! (Your customizations will be saved in <code>localStorage</code>.)</p>
+        <style id="css" contenteditable></style>
+
+        <script>
+            const styleEl = document.getElementById('css');
+            window.addEventListener('load', () => {
+                loadStyles();
+            });
+
+            styleEl.addEventListener('keyup', e => {
+                const styles = styleEl.innerText;
+                saveStyles(styles);
+            });
+
+            function saveStyles(styles) {
+                localStorage.setItem('styles', styles);
+            }
+
+            function loadStyles() {
+                const savedStyles = localStorage.getItem('styles');
+                if (savedStyles) {
+                    styleEl.innerText = savedStyles;
+                } else {
+                    styleEl.innerText = `
+                        body { background-color: whitesmoke; }
+                        h1 { font-family: sans-serif; }
+                    `.trim();
+                }
+            }
+        </script>
+    </body>
+</html>
